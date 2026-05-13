@@ -1,0 +1,27 @@
+def caesar(text, shift, encrypt=True): #Definiu 3 valores diferentes
+
+    if not isinstance(shift, int): #ininstance checa o valor de Shift é true e inteiro
+        return 'Shift must be an integer value.' #se não for dentro dos parametros retorna a mensagem
+
+    if shift < 1 or shift > 25: #se o valor de shift for menor que 1 ou maior que 25, retorna a string
+        return 'Shift must be an integer between 1 and 25.'
+
+    alphabet = 'abcdefghijklmnopqrstuvwxyz' #o alfabeto que serve de passe para a criptografia
+
+    if not encrypt: #se não tiver criptografado
+        shift = - shift
+    
+    shifted_alphabet = alphabet[shift:] + alphabet[:shift]
+    translation_table = str.maketrans(alphabet + alphabet.upper(), shifted_alphabet + shifted_alphabet.upper())
+    encrypted_text = text.translate(translation_table)
+    return encrypted_text  #retorno do texto criptografado
+
+def encrypt(text, shift): #para texto criptografado
+    return caesar(text, shift)
+    
+def decrypt(text, shift): #para desgriptografar o texto
+    return caesar(text, shift, encrypt=False)
+
+encrypted_text = 'Pbhentr vf sbhaq va hayvxryl cynprf.' #texto a ser desgriptografado
+decrypted_text = decrypt(encrypted_text, 13) #parametros de (text, shift)
+print(decrypted_text)
