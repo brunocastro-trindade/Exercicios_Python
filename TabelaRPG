@@ -1,0 +1,28 @@
+full_dot = '●'
+empty_dot = '○'
+
+def create_character(name, STR, INT, CHA): #definiu três tipos de parâmetros {nome, str, int, cha}
+    if not isinstance (name, str):
+        return 'The character name should be a string.' #se o nome não for uma string retorna esse valor dentro da ""
+    if not name:
+        return 'The character should have a name.' #Se não preencherem o nome volta com a mensagem do return
+    if len(name)>10:
+        return 'The character name is too long.' #len(name) define que o nome so pode ter 10 caracteres
+    if " " in name:
+        return 'The character name should not contain spaces.' #as aspas vazias sinalizam que o nome do personagem não pode ter espaços
+    if not isinstance(STR, int) or  not isinstance(INT, int) or not isinstance(CHA, int): #Se os números não forem inteiros
+        return 'All stats should be integers.'
+    if STR < 1 or INT < 1 or CHA < 1:
+        return 'All stats should be no less than 1.'
+    if STR > 4 or INT > 4 or CHA > 4:
+        return 'All stats should be no more than 4.'
+    if STR + INT + CHA != 7:
+        return 'The character should start with 7 points.'
+
+    # Falta as quebras de linha com /n
+    str_valor = (full_dot * STR) + (empty_dot * (10 - STR))
+    int_valor = (full_dot * INT) + (empty_dot * (10 - INT))
+    cha_valor = (full_dot * CHA) + (empty_dot * (10 - CHA))
+    return f"Character:\n{name}\nSTR: {str_valor}\nINT: {int_valor}\nCHA: {cha_valor}" #retorna com os dados em linhas quebradas.
+
+print(create_character('ren', 4, 2, 1))
